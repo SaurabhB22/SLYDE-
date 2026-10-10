@@ -47,3 +47,11 @@ Backend/python/processing/sikkim_training_features.csv
 
 # Downloaded IMERG processing outputs
 Backend/python/ingestion/imerg/sikkim_precipitation_data/
+
+# Local backups — keep out of Git
+*.backup-*
+*.backup
+*.before-*
+*.repair-backup.js
+backup-push-frontend-*/
+backups/
