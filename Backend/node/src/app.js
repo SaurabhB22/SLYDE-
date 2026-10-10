@@ -8,6 +8,7 @@ const rainfallRoutes = require("./routes/rainfall");
 const satelliteRoutes = require('./routes/satellite');
 const riskRoutes = require("./routes/risk");
 const pushRoutes = require("./routes/push");
+const externalLandslideRoutes = require("./routes/externalLandslides");
 const app = express();
 
 app.use(cors());
@@ -28,5 +29,6 @@ app.use("/api/landslides", landslideRoutes);
 app.use("/api/rainfall", rainfallRoutes);
 app.use("/api/risk", riskRoutes);
 app.use("/api/push", pushRoutes);
+app.use("/api/external-landslides", externalLandslideRoutes);
 app.use('/api/satellite', satelliteRoutes);
 module.exports = app;

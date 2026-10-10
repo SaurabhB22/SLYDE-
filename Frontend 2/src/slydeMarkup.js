@@ -1,8 +1,8 @@
 export const slydeMarkup = String.raw`<div class="app">
   <aside class="side" aria-label="Rainfall, selected point and documented sites">
     <div class="brand">
-      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="9" fill="var(--accent)"/><path d="M4 31 L16 11 L22 21 L27 14 L36 31 Z" fill="var(--accent-ink)"/><circle cx="25" cy="25" r="2.2" fill="#E8B923"/><circle cx="29.5" cy="28.5" r="1.6" fill="#C4561A"/><circle cx="21.5" cy="28" r="1.3" fill="#A81F18"/></svg>
-      <div><h1>SLYDE Sikkim</h1><p>3D landslide risk map</p></div>
+      <img class="brand-logo" src="/slyde-icon.png" alt="SLYDE logo" width="48" height="48">
+      <div><h1>SLYDE</h1><p>3D landslide risk map</p></div>
     </div>
     <p class="demo" role="note">Demo. Boundaries, places, roads and slide sites are real. Rainfall is what you set below, not a live feed, and the terrain is modelled, not a survey DEM. Do not use it for real decisions. Emergency: 112.</p>
 
@@ -44,6 +44,13 @@ export const slydeMarkup = String.raw`<div class="app">
         <details><summary>Namchi district</summary><div><p>District Superintendent of Police</p><a href="tel:9046245044">90462 45044</a></div></details>
       </div>
       <p class="hint helpline-source">Official sources: <a href="https://ssdma.nic.in/" target="_blank" rel="noopener noreferrer">Sikkim State Disaster Management Authority</a> · <a href="https://www.police.sikkim.gov.in/visitor/telephonepolice" target="_blank" rel="noopener noreferrer">Sikkim Police contact directory</a> · <a href="https://www.sikkim.gov.in/media/press-release/press-info?id=132327&amp;name=Press+Release+from+Office+of+the+Press+Secretary+to+Hon%E2%80%99ble+Chief+Minister+of+Sikkim" target="_blank" rel="noopener noreferrer">State health emergency helpline notice (22 Apr 2025)</a>. Contact details can change; verify with the official department when possible.</p>
+    </section>
+
+    <section class="sec" aria-labelledby="externalReportsTitle">
+      <h2 id="externalReportsTitle">Recent Landslide Intelligence</h2>
+      <p class="hint">Public web reports discovered by TinyFish. These are unverified reports, not model predictions or confirmed live alerts.</p>
+      <div id="externalReportStatus" class="hint" role="status" aria-live="polite">Loading external reports…</div>
+      <div id="externalReportList" class="external-report-list"></div>
     </section>
 
     <section class="sec">

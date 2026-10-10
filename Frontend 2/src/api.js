@@ -90,6 +90,66 @@ function addMapSites(sites) {
     const marker = label?.querySelector('i'); if (marker) marker.style.background = color;
   }
 }
+function renderExternalReports(reports, errorMessage = '') {
+  const list = document.getElementById('externalReportList');
+  const status = document.getElementById('externalReportStatus');
+  if (!list || !status) return;
+
+  list.replaceChildren();
+
+  if (errorMessage) {
+    status.textContent = `External reports unavailable: ${errorMessage}`;
+    return;
+  }
+
+  status.textContent =
+    `${reports.length} saved external report${reports.length === 1 ? '' : 's'} · source dates may be older than discovery dates`;
+
+  if (!reports.length) {
+    const empty = document.createElement('p');
+    empty.className = 'hint';
+    empty.textContent = 'No external reports have been saved yet.';
+    list.appendChild(empty);
+    return;
+  }
+
+  for (const report of reports) {
+    const card = document.createElement('article');
+    card.className = 'external-report-card';
+
+    const heading = document.createElement('h3');
+    const link = document.createElement('a');
+    link.textContent = report.sourceTitle || 'Untitled external report';
+
+    try {
+      const url = new URL(report.sourceUrl);
+      if (url.protocol === 'https:' || url.protocol === 'http:') {
+        link.href = url.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+    } catch {}
+
+    heading.appendChild(link);
+
+    const meta = document.createElement('p');
+    meta.className = 'external-report-meta';
+    meta.textContent =
+      `${report.sourceDomain || 'External source'} · Reported: ${report.reportedDateText || 'Date not provided'}`;
+
+    const badge = document.createElement('span');
+    badge.className = 'external-report-badge';
+    badge.textContent = report.verificationStatus || 'unverified';
+
+    const snippet = document.createElement('p');
+    snippet.className = 'external-report-snippet';
+    snippet.textContent = report.sourceSnippet || 'No summary supplied by search.';
+
+    card.append(heading, meta, badge, snippet);
+    list.appendChild(card);
+  }
+}
+
 export async function connectSlydeBackend() {
   const status = document.getElementById('imd');
   const toast = (message) => { const node = document.getElementById('toast'); if (node) { node.textContent = message; node.classList.add('on'); setTimeout(() => node.classList.remove('on'), 3500); } };
@@ -113,6 +173,18 @@ export async function connectSlydeBackend() {
     for (const site of inventory) site.backendRisk = siteRiskFor(site);
     addMapSites(inventory);
     renderApiSiteList(inventory);
+
+    // External web reports are independent of inventory and model risk scores.
+    getJSON('/external-landslides?limit=30')
+      .then(body => {
+        const reports = Array.isArray(body?.reports) ? body.reports : arr(body);
+        window.__slydeApi.externalReports = reports;
+        renderExternalReports(reports);
+      })
+      .catch(error => {
+        window.__slydeApi.externalReports = [];
+        renderExternalReports([], error.message);
+      });
     const good = Object.values(window.__slydeApi.endpoints).filter(Boolean).length;
     const total = Object.keys(window.__slydeApi.endpoints).length;
     if (status) status.textContent = `24-hour rain uses IMD's daily scale. Backend ${good}/${total} endpoints responding · ${inventory.length} inventory sites · ${riskRows.length} risk rows · NASA GPM IMERG grid ${gridRainfall.length} rows · historical rainfall ${historicalRainfall.length} rows · risk date 2025-06-07. Sliders remain scenario controls.`;

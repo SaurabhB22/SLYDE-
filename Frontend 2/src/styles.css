@@ -366,3 +366,14 @@ body,
     grid-row: auto;
   }
 }
+
+/* TinyFish external landslide intelligence panel */
+.external-report-list{display:grid;gap:8px;margin-top:8px}
+.external-report-card{min-width:0;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--field)}
+.external-report-card h3{font-size:14px;line-height:1.35;margin:0 0 5px;overflow-wrap:anywhere}
+.external-report-card h3 a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:2px}
+.external-report-meta,.external-report-snippet{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--muted);overflow-wrap:anywhere}
+.external-report-badge{display:inline-block;margin-top:5px;padding:2px 7px;border:1px solid var(--line);border-radius:999px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);background:var(--panel)}
+
+/* SLYDE custom sidebar logo */
+.brand-logo{display:block;width:48px;height:48px;flex:0 0 48px;object-fit:contain;border-radius:9px}
