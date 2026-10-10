@@ -1,0 +1,34 @@
+# Python
+python/.venv/
+__pycache__/
+*.pyc
+
+# Node
+# Python environments and cache
+**/.venv/
+**/__pycache__/
+*.py[cod]
+
+# Node dependencies
+**/node_modules/
+
+# Secrets and environment files
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Data that should not be committed
+Backend/data/rainfall/raw/
+Backend/data/satellite/
+Backend/data/terrain/
+
+# Generated ML artifacts
+Backend/models/trained/
+Backend/models/checkpoints/
+
+# OS files and logs
+.DS_Store
+*.log
