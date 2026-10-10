@@ -32,3 +32,15 @@ Backend/models/checkpoints/
 # OS files and logs
 .DS_Store
 *.log
+
+# SLYDE: raw IMERG data
+Backend/python/ingestion/imerg/raw/
+Backend/python/ingestion/imerg/raw_historical/
+
+# SLYDE: generated processing outputs
+Backend/python/processing/sikkim_baseline_risk_indicator.csv
+Backend/python/processing/sikkim_training_features.csv
+
+# macOS metadata
+.DS_Store
+**/.DS_Store
