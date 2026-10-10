@@ -44,3 +44,6 @@ Backend/python/processing/sikkim_training_features.csv
 # macOS metadata
 .DS_Store
 **/.DS_Store
+
+# Downloaded IMERG processing outputs
+Backend/python/ingestion/imerg/sikkim_precipitation_data/
