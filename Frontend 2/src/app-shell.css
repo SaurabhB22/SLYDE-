@@ -1,0 +1,1 @@
+html,body,#root{height:100%;min-height:100%;margin:0} body{overflow:hidden} @media(max-width:900px){body{overflow:auto} #root{height:auto;min-height:100%}}
